@@ -1,0 +1,23 @@
+%%%%% Шрифт %%%%%
+\renewcommand{\familydefault}{\sfdefault}
+
+%%% Ссылки %%%
+\definecolor{linkcolor}{HTML}{8b00ff}
+\hypersetup{
+	colorlinks = true,
+	linkcolor = linkcolor,
+	urlcolor = linkcolor,
+	citecolor = linkcolor
+}
+
+%%% Выравнивание %%%
+\setlength{\parskip}{0em}
+\geometry{a4paper, left=12mm, top=25mm, right=12mm}
+\setlength{\parindent}{0cm}
+\linespread{1.1}
+
+%%% Колонтитулы %%%
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\cname, \pname}
+\fancyhead[R]{\thepage}

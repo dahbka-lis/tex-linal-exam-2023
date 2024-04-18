@@ -1,0 +1,232 @@
+\task{6}
+\begin{condition}
+    Существует ли матрица $A \in \Mat_{2 \times 3}(\R)$ ранга 2 со следующими свойствами:
+    \begin{enumerate}
+        \item[1)] одно из сингулярных значений матрицы $A$ равно $\sqrt{20}$;
+
+        \item[2)] ближайшая к $A$ по норме Фробениуса матрица ранга $1$ есть
+            $
+                B =
+                \begin{pmatrix}
+                    3 & -3 & 3 \\
+                    1 & -1 & 1
+                \end{pmatrix}
+            $?
+    \end{enumerate}
+    Если существует, то предъявите такую матрицу.
+\end{condition}
+
+Рассмотрим теоретическое сингулярное разложение матрицы $A$. Пусть:
+\[
+    A = U \cdot \Sigma \cdot V^T
+\]
+где $U = (u_1 \ \; u_2),\; V^T = (v_1 \ \; v_2 \ \; v_3)$ и $\Sigma =
+    \begin{pmatrix}
+        \sigma_1 & 0        & 0 \\
+        0        & \sigma_2 & 0
+    \end{pmatrix}$, причём $u_1, u_2 \in \R^2$ и $v_1, v_2, v_3 \in \R^3$.
+\\[5mm]
+Вспомним предложение с лекции:
+\[
+    A = U \cdot \Sigma \cdot V^T = u_1 \sigma_1 v_1^T + u_2 \sigma_2 v_2^T
+\]
+Рассмотрим теорему о низкоранговом приближении:
+\begin{theorem}
+    Пусть $A \in \Mat_{m \times n}(\R), \; \rk A = r$. Пусть $A = U \Sigma V^T$ - SVD для $A$. $\forall \; k = 1, \; \ldots, \; r - 1 $ положим:
+    \[
+        \Sigma_k =
+        \begin{pmatrix}
+            \sigma_1 & \cdots & 0        & \cdots & 0      \\
+            \vdots   & \ddots & \vdots   & \ddots & \vdots \\
+            0        & \cdots & \sigma_k & \cdots & 0      \\
+            \vdots   & \ddots & \vdots   & \ddots & \vdots \\
+            0        & \cdots & 0        & \cdots & 0
+        \end{pmatrix}
+        \text{ - первые $k$ сингулярных значений}
+    \]
+    Тогда минимум величины $\Vert A - B \Vert$ (норма Фробениуса) среди всех матриц $B$ ранга $\leq k$ достигается при $B = U \Sigma_k V^T$.
+\end{theorem}
+
+По теореме понимаем, что матрица $B$ ранга 1 максимально приближает неизвестную матрицу $A$, если $B = U \Sigma_1 V^T$. Тогда $\Sigma_1 = \sigma_1$ и, соответственно, $B = u_1 \sigma_1 v_1^T$.
+
+Заметим, что:
+\[
+    B =
+    \begin{pmatrix}
+        3 & -3 & 3 \\
+        1 & -1 & 1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        3 \\
+        1
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & -1 & 1
+    \end{pmatrix}
+\]
+Нормируем векторы и получим:
+\[
+    B =
+    \begin{pmatrix}
+        3 \\
+        1
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & -1 & 1
+    \end{pmatrix}
+    =
+    \sqrt{10}
+    \begin{pmatrix}
+        \d{3 \sqrt{10}}{10} \\[0.7mm]
+        \d{\sqrt{10}}{10}
+    \end{pmatrix}
+    \cdot
+    \sqrt{3}
+    \begin{pmatrix}
+        \d{\sqrt{3}}{3} & -\d{\sqrt{3}}{3} & \d{\sqrt{3}}{3}
+    \end{pmatrix}
+    =
+    \underbrace{
+        \begin{pmatrix}
+            \d{3 \sqrt{10}}{10} \\[0.7mm]
+            \d{\sqrt{10}}{10}
+        \end{pmatrix}
+    }_{u_1}
+    \underbrace{\sqrt{30}}_{\sigma_1}
+    \underbrace{
+        \begin{pmatrix}
+            \d{\sqrt{3}}{3} & -\d{\sqrt{3}}{3} & \d{\sqrt{3}}{3}
+        \end{pmatrix}
+    }_{v_1^T}
+\]
+Таким образом, мы получили первую компоненту ранга 1 для сингулярного разложения матрицы $A$. Далее, по условию задачи полагаем $\sigma_2 = \sqrt{20}$. Заметим, что $\sigma_1 = \sqrt{30} > \sigma_2 = \sqrt{20}$, значит разложение определено верно. Тогда имеем:
+\[
+    A = u_1 \sqrt{30}\  v_1^T + u_2 \sqrt{20}\  v_2^T
+\]
+
+Придумаем, каким образом мы можем при нормировке получить $\sigma_2 = \sqrt{20}$. В первом случае из вектора $u_1$ мы вынесли $\sqrt{10}$, из $v_1$ получили $\sqrt{3}$. Тогда за $u_2$ возьмём и нормируем такой вектор, который является ортогональным относительно $u_1$ и его длина равна $\sqrt{10}$. Например:
+\[
+    \begin{pmatrix}
+        -1 \\
+        3
+    \end{pmatrix}
+    \implies
+    u_2 =
+    \frac{1}{\sqrt{10}}
+    \begin{pmatrix}
+        -1 \\
+        3
+    \end{pmatrix}, \quad
+    (u_1,\; u_2) = -3 + 3 = 0
+\]
+Теперь для $v_2$ подберём такой вектор, который является ортогональным к $v_1$ и с длиной $\sqrt{2}$ (так как $\sqrt{20} = \sqrt{10} \cdot \sqrt{2}$, а $\sqrt{10}$ из вектора $u_2$). Если посмотреть на $v_1$ до нормировки, сразу приходят на ум такие ортогональные к нему векторы:
+\[
+    \{
+    \begin{pmatrix}
+        1 \\
+        1 \\
+        0
+    \end{pmatrix},\;
+    \begin{pmatrix}
+        0 \\
+        1 \\
+        1 \\
+    \end{pmatrix},\;
+    \begin{pmatrix}
+        \pm 1 \\
+        0     \\
+        \mp 1
+    \end{pmatrix}
+    \}
+\]
+Возьмём первый вектор, тогда имеем:
+\[
+    \begin{pmatrix}
+        1 \\
+        1 \\
+        0
+    \end{pmatrix}
+    \implies
+    v_2 = \d{1}{\sqrt{2}}
+    \begin{pmatrix}
+        1 \\
+        1 \\
+        0
+    \end{pmatrix}, \quad
+    (v_1, \;v_2) = \d{\sqrt{6}}{6} - \d{\sqrt{6}}{6} = 0
+\]
+Итого, наборы $(u_1, u_2)$ и $(v_1, v_2)$ являются ортонормированными системами. Найдём матрицу $A$:
+\[
+    A = u_1 \sqrt{30}\  v_1^T + u_2 \sqrt{20}\  v_2^T =
+    \begin{pmatrix}
+        \d{3 \sqrt{10}}{10} \\[0.7mm]
+        \d{\sqrt{10}}{10}
+    \end{pmatrix}
+    \sqrt{30}
+    \begin{pmatrix}
+        \d{\sqrt{3}}{3} & -\d{\sqrt{3}}{3} & \d{\sqrt{3}}{3}
+    \end{pmatrix}
+    +
+    \begin{pmatrix}
+        -\d{\sqrt{10}}{10} \\[0.7mm]
+        \d{3 \sqrt{10}}{10}
+    \end{pmatrix}
+    \sqrt{20}
+    \begin{pmatrix}
+        \d{\sqrt{2}}{2} & \d{\sqrt{2}}{2}
+    \end{pmatrix}
+    =
+\]
+\[
+    =
+    \begin{pmatrix}
+        3 \\
+        1
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & -1 & 1
+    \end{pmatrix}
+    +
+    \begin{pmatrix}
+        -1 \\
+        3
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 & 1 & 0
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        3 & -3 & 3 \\
+        1 & -1 & 1
+    \end{pmatrix}
+    +
+    \begin{pmatrix}
+        -1 & -1 & 0 \\
+        3  & 3  & 0
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        2 & -4 & 3 \\
+        4 & 2  & 1
+    \end{pmatrix}
+\]
+
+\answer{6}
+Да, существует:
+$
+    A =
+    \begin{pmatrix}
+        2 & -4 & 3 \\
+        4 & 2  & 1
+    \end{pmatrix}
+    =
+    U \Sigma V^T
+$, где
+$
+    \Sigma =
+    \begin{pmatrix}
+        \sqrt{30} & 0         & 0 \\
+        0         & \sqrt{20} & 0 \\
+    \end{pmatrix}
+$.
