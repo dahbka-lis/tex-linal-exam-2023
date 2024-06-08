@@ -12,7 +12,6 @@
 
 %%%%% Математические обозначения %%%%%
 \renewcommand{\tr}{tr}
-\renewcommand{\Im}{Im}
 \DeclareMathOperator{\vht}{ht}
 \DeclareMathOperator{\rk}{rk}
 \DeclareMathOperator{\pr}{pr}
@@ -42,14 +41,14 @@
 % Расширенная матрица
 \newenvironment{amatrix}[2]
 {\left(\begin{array}{@{}*{#1}{c}|*{#2}{c}@{}}}
-                {\end{array}\right)}
+        {\end{array}\right)}
 
 % Блок с условием
 \newenvironment{condition}
 {\begin{tcolorbox}[colback = green!10!white, colframe = green!75!black]}
-                {\end{tcolorbox}}
+        {\end{tcolorbox}}
 
 % Блок с теоремой
 \newenvironment{theorem}
 {\begin{tcolorbox}[colback = blue!5!white, colframe = blue!75!black, opacityframe=0.2,opacityback=0.8]}
-                {\end{tcolorbox}}
+        {\end{tcolorbox}}
